@@ -50,3 +50,37 @@ export const amphibian = [
     available: true
   }
 ];
+
+export const login = [
+{
+  id: 1,
+  name: "DomCatLover7",
+  password:"Cats1234",
+  available: true
+},
+{
+  id: 2,
+  name: "DarkSoulCatLover",
+  password:"Pets1245",
+  available: true
+},
+{
+  id: 3,
+  name: "DogsLover8",
+  password:"WildChild221",
+  available: true
+},
+{
+  id: 4,
+  name: "LizardWorld25",
+  password:"Amphibian3",
+  available: true
+},
+{
+  id: 5,
+  name: "BirdsRulez",
+  password:"Love112",
+  available: true
+}
+
+];

@@ -3,6 +3,11 @@ import dotenv from 'dotenv';
 import connectDB from "./db/conn.mjs";
 import globalErr from "./middleware/globalErr.mjs";
 import log from "./middleware/loggingMiddleware.mjs";
+import amphRoutes from "./routes/amphRoutes.mjs";
+import loginRoutes from "./routes/loginRoutes.mjs";
+import bcrypt from 'bcrypt';
+
+
 
 
 // Setups
@@ -15,8 +20,18 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+app.use(log);
 
 // Routes
+app.use("/api/amphibian", amphRoutes);
+app.use("/api/login", loginRoutes);
+
+
+app.set('view engine', 'ejs'); 
+
+app.get("/", (req, res) => {
+    res.render("login");
+});
 
 // Err Handling Middleware
 app.use(globalErr);

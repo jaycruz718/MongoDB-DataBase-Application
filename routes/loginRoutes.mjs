@@ -1,5 +1,5 @@
 import express from "express";
-import login from "../models/loginSchema.mjs"; // Assuming this is your MongoDB model
+import login from "../models/loginSchema.mjs"; 
 const router = express.Router();
 import bcrypt from 'bcrypt';
 
@@ -8,19 +8,18 @@ router.post('/signup', async (req, res) => {
   try {
     const { name, password } = req.body;
 
-    // ✅ Check if user already exists
     const existingUser = await Login.findOne({ name });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // ✅ Hash the password
+   
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // ✅ Create new user with hashed password
+ 
     const newUser = new Login({ name, password: hashedPassword });
 
-    // ✅ Save user to DB
+ 
     const savedUser = await newUser.save();
 
     res.status(201).json({

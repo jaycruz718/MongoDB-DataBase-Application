@@ -5,9 +5,7 @@ import globalErr from "./middleware/globalErr.mjs";
 import log from "./middleware/loggingMiddleware.mjs";
 import amphRoutes from "./routes/amphRoutes.mjs";
 import loginRoutes from "./routes/loginRoutes.mjs";
-import bcrypt from 'bcrypt';
-
-
+import signUpRoutes from "./routes/signUpRoutes.mjs";
 
 
 // Setups
@@ -25,6 +23,7 @@ app.use(log);
 // Routes
 app.use("/api/amphibian", amphRoutes);
 app.use("/api/login", loginRoutes);
+app.use("/api/signUp", signUpRoutes);
 
 
 app.set('view engine', 'ejs'); 

@@ -1,5 +1,5 @@
 import express from "express";
-import amphibian from "../models/amphSchema.mjs";
+import Amphibian from "../models/amphSchema.mjs";
 const router = express.Router();
 
 router

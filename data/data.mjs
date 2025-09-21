@@ -1,4 +1,4 @@
-export const amphibian = [
+export const Amphibian = [
   {
     id: 1,
     name: "Red-eyed Tree Frog",

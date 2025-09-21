@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(log);
 
 // Routes
-app.use("/api/amphibian", amphRoutes);
+app.use("/api/amphibians", amphRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/signUp", signUpRoutes);
 

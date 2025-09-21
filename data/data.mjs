@@ -84,3 +84,50 @@ export const login = [
 }
 
 ];
+
+export const signUp = [
+  { 
+    id: 1,
+    firstname: "David",
+    lastname: "Winters",
+    email: "davidW@example.com",
+    password: "WinterLover1234"
+  },
+  {
+    id: 2,
+    firstname: "Sandy",
+    lastname: "Squirrel",
+    email: "Science@example.com",
+    password: "Texasisdabest99"
+  },
+  {
+    id: 3,
+    firstname: "Eugiene",
+    lastname: "Krabs",
+    email: "MrKrabs@example.com",
+    password: "ILoveMoney!"
+  },
+  {
+    id: 4,
+    firstname: "Gary",
+    lastname: "DaSnail",
+    email: "GaryDaSnail@example.com",
+    password: "BikiniBottom4va"
+  },
+    {
+    id: 5,
+    firstname: "SpongeBob",
+    lastname: "SquarePants",
+    email: "SpongeBob@example.com",
+    password: "Crustykrab4eva!"
+  },
+    {
+    id: 6,
+    firstname: "Patrick",
+    lastname: "Star",
+    email: "PatrickS@example.com",
+    password: "Bestfriends4lyfe!"
+  }
+
+];
+ 

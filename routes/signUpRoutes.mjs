@@ -1,6 +1,6 @@
 import express from "express";
 import bcrypt from "bcrypt";
-import signUpModel from "../models/signUpSchema.mjs"; // 👈 renamed for clarity
+import signUpModel from "../models/signUpSchema.mjs"; 
 
 const router = express.Router();
 

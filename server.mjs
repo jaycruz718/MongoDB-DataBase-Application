@@ -25,9 +25,6 @@ app.use("/api/amphibian", amphRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/signUp", signUpRoutes);
 
-
-app.set('view engine', 'ejs'); 
-
 app.get("/", (req, res) => {
     res.render("login");
 });

@@ -5,17 +5,34 @@ const router = express.Router();
 router
   .route("/")
   .post(async (req, res) => {
+  try {
+    const { name, species, age, habitat } = req.body;
+    if (!name || !species || !age || !habitat) {
+      return res.status(400).json({ msg: "Missing required fields" });
+    }
+    if (!["tropical", "desert", "aquatic", "jungles", "temperate"].includes(habitat)) {
+      return res.status(400).json({ msg: "Invalid habitat value" });
+    }
+    
+    let newAmphibian = await Amphibian.create(req.body);
+    res.json(newAmphibian);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: `Error - ${err.message}` });
+  }
+})
+
+  /* .post(async (req, res) => {
     try {
-      // Perform Action
+  
       let newAmphibian = await Amphibian.create(req.body);
 
-      // Return Response
       res.json(newAmphibian);
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: `Error - ${err.message}` });
     }
-  })
+  })*/
 
   .get(async (req, res) => {
       try {
@@ -35,7 +52,7 @@ router
       let updatedAmphibian = await Amphibian.findByIdAndUpdate(
         req.params.id,
         req.body,
-        { new: true } // Option to allow newly updated object to be sent back
+        { new: true } 
       );
 
       res.json(updatedAmphibian);

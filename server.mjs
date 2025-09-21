@@ -21,12 +21,12 @@ app.use(express.json());
 app.use(log);
 
 // Routes
-app.use("/api/amphibians", amphRoutes);
+app.use("/api/amphibian", amphRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/signUp", signUpRoutes);
 
 app.get("/", (req, res) => {
-    res.render("login");
+  res.json({ message: "Welcome to the Amphibian API" });
 });
 
 // Err Handling Middleware

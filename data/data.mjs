@@ -1,133 +1,173 @@
-export const Amphibian = [
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import Amphibian from './models/amphSchema.mjs';
+import SignUpUser from './models/signUpSchema.mjs';
+import LoginUser from './models/loginSchema.mjs';
+
+dotenv.config();
+
+const amphibians = [
   {
-    id: 1,
     name: "Red-eyed Tree Frog",
     species: "Agalychnis callidryas",
     age: 2,
-    gender: "Female",
-    description: "A vibrant tree frog with striking red eyes. Very active at night.",
-    image: "https://example.com/images/red-eyed-tree-frog.jpg",
-    available: true
+    habitat: "tropical"
   },
   {
-    id: 2,
     name: "Axolotl",
     species: "Ambystoma mexicanum",
     age: 1,
-    gender: "Male",
-    description: "A neotenic salamander that keeps its gills for life. Very popular in exotic pet communities.",
-    image: "https://example.com/images/axolotl.jpg",
-    available: true
+    habitat: "aquatic"
   },
   {
-    id: 3,
     name: "Fire Salamander",
     species: "Salamandra salamandra",
     age: 3,
-    gender: "Female",
-    description: "Black body with bright yellow spots. Prefers moist forest environments.",
-    image: "https://example.com/images/fire-salamander.jpg",
-    available: false
+    habitat: "temperate"
   },
   {
-    id: 4,
     name: "African Bullfrog",
     species: "Pyxicephalus adspersus",
     age: 5,
-    gender: "Male",
-    description: "Large and aggressive eater. Requires a lot of space and care.",
-    image: "https://example.com/images/african-bullfrog.jpg",
-    available: true
+    habitat: "desert"
   },
   {
-    id: 5,
     name: "Eastern Newt",
     species: "Notophthalmus viridescens",
     age: 2,
-    gender: "Female",
-    description: "Small and aquatic. Goes through a terrestrial 'eft' stage before returning to the water.",
-    image: "https://example.com/images/eastern-newt.jpg",
-    available: true
+    habitat: "aquatic"
+  },
+  {
+    name: "Tiger Salamander",
+    species: "Ambystoma tigrinum",
+    age: 4,
+    habitat: "temperate"
+  },
+  {
+    name: "Glass Frog",
+    species: "Centrolenidae",
+    age: 1,
+    habitat: "jungles"
+  },
+  {
+    name: "Cave Salamander",
+    species: "Eurycea lucifuga",
+    age: 2,
+    habitat: "temperate"
+  },
+  {
+    name: "Green Tree Frog",
+    species: "Hyla cinerea",
+    age: 3,
+    habitat: "tropical"
+  },
+  {
+    name: "Amazon Milk Frog",
+    species: "Trachycephalus resinifictrix",
+    age: 2,
+    habitat: "tropical"
   }
 ];
 
-export const login = [
-{
-  id: 1,
-  name: "DomCatLover7",
-  password:"Cats1234",
-  available: true
-},
-{
-  id: 2,
-  name: "DarkSoulCatLover",
-  password:"Pets1245",
-  available: true
-},
-{
-  id: 3,
-  name: "DogsLover8",
-  password:"WildChild221",
-  available: true
-},
-{
-  id: 4,
-  name: "LizardWorld25",
-  password:"Amphibian3",
-  available: true
-},
-{
-  id: 5,
-  name: "BirdsRulez",
-  password:"Love112",
-  available: true
+
+const signUpUsers = [
+  {
+    firstname: "Alice",
+    lastname: "Frogger",
+    email: "alice@example.com",
+    password: "pass123"
+  },
+  {
+    firstname: "Bob",
+    lastname: "Newt",
+    email: "bob@example.com",
+    password: "pass456"
+  },
+  {
+    firstname: "Charlie",
+    lastname: "Toad",
+    email: "charlie@example.com",
+    password: "pass789"
+  },
+  {
+    firstname: "Daisy",
+    lastname: "Axol",
+    email: "daisy@example.com",
+    password: "pass101"
+  },
+  {
+    firstname: "Eve",
+    lastname: "Salam",
+    email: "eve@example.com",
+    password: "pass202"
+  },
+  {
+    firstname: "Frank",
+    lastname: "Bullfrog",
+    email: "frank@example.com",
+    password: "pass303"
+  },
+  {
+    firstname: "Grace",
+    lastname: "Treefrog",
+    email: "grace@example.com",
+    password: "pass404"
+  },
+  {
+    firstname: "Henry",
+    lastname: "Hop",
+    email: "henry@example.com",
+    password: "pass505"
+  },
+  {
+    firstname: "Ivy",
+    lastname: "Leap",
+    email: "ivy@example.com",
+    password: "pass606"
+  },
+  {
+    firstname: "Jake",
+    lastname: "Swamp",
+    email: "jake@example.com",
+    password: "pass707"
+  }
+];
+
+const loginUsers = [
+  { name: "frogFan101", password: "secret123" },
+  { name: "swampGuy", password: "green456" },
+  { name: "axolotlQueen", password: "gills789" },
+  { name: "salamanderPower", password: "firefire" },
+  { name: "toadKing", password: "croakit" },
+  { name: "wetWorld", password: "splashy" },
+  { name: "jungleJumper", password: "leapfrog" },
+  { name: "pondPeeper", password: "quackme" },
+  { name: "mudDweller", password: "dirtlife" },
+  { name: "ecoWarrior", password: "savefrogs" }
+];
+
+try {
+  await mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+
+  console.log("Connected to MongoDB");
+
+  // Clear existing data
+  await Amphibian.deleteMany({});
+  await SignUpUser.deleteMany({});
+  await LoginUser.deleteMany({});
+
+  // Insert new data
+  await Amphibian.insertMany(amphibians);
+  await SignUpUser.insertMany(signUpUsers);
+  await LoginUser.insertMany(loginUsers);
+
+  console.log("Database seeded successfully");
+
+  mongoose.connection.close();
+} catch (err) {
+  console.error("Seeding error:", err.message);
+  process.exit(1);
 }
-
-];
-
-export const signUp = [
-  { 
-    id: 1,
-    firstname: "David",
-    lastname: "Winters",
-    email: "davidW@example.com",
-    password: "WinterLover1234"
-  },
-  {
-    id: 2,
-    firstname: "Sandy",
-    lastname: "Squirrel",
-    email: "Science@example.com",
-    password: "Texasisdabest99"
-  },
-  {
-    id: 3,
-    firstname: "Eugiene",
-    lastname: "Krabs",
-    email: "MrKrabs@example.com",
-    password: "ILoveMoney!"
-  },
-  {
-    id: 4,
-    firstname: "Gary",
-    lastname: "DaSnail",
-    email: "GaryDaSnail@example.com",
-    password: "BikiniBottom4va"
-  },
-    {
-    id: 5,
-    firstname: "SpongeBob",
-    lastname: "SquarePants",
-    email: "SpongeBob@example.com",
-    password: "Crustykrab4eva!"
-  },
-    {
-    id: 6,
-    firstname: "Patrick",
-    lastname: "Star",
-    email: "PatrickS@example.com",
-    password: "Bestfriends4lyfe!"
-  }
-
-];
- 

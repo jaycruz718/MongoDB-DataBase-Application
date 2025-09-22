@@ -6,12 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.mjs",
-    "dev": "nodemon server.mjs"
+    "dev": "nodemon server.mjs",
+    "seed": "node data.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "nodemon": "^3.1.10"
   },

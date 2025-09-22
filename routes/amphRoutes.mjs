@@ -2,6 +2,33 @@ import express from "express";
 import Amphibian from "../models/amphSchema.mjs";
 const router = express.Router();
 
+router.post("/test-invalid", async(req, res) =>{
+    try {
+      const invalidData = {
+        name: "A",
+        species: "",
+        age: -1,
+        habitat: "space"
+      };
+      
+      const testDoc = new Amphibian(invalidData);
+      await testDoc.save();
+
+      res.status(200).json({ msg: "Unexpected success", data: testDoc});
+    } catch (err) {
+      if (err.name === "ValidationError") {
+        const errors = {};
+        for (let field in err.errors){
+          errors[field] = err.errors[field].message;
+        }
+        return res.status(400).json({ msg: "Validation Failed", errors });
+      }
+
+      console.error(err);
+      res.status(500).json({ msg: "Unexpected Server Error " });
+    }
+  });
+
 router
   .route("/")
   .post(async (req, res) => {
@@ -21,18 +48,6 @@ router
     res.status(500).json({ msg: `Error - ${err.message}` });
   }
 })
-
-  /* .post(async (req, res) => {
-    try {
-  
-      let newAmphibian = await Amphibian.create(req.body);
-
-      res.json(newAmphibian);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).json({ msg: `Error - ${err.message}` });
-    }
-  })*/
 
   .get(async (req, res) => {
       try {

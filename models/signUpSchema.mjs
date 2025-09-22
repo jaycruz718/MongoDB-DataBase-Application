@@ -24,6 +24,8 @@ const signUpSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
+signUpSchema.index({ email: 1}, { unique: true });
+
 // Collection Part
 const collection = new mongoose.model("SignUp", signUpSchema);
 

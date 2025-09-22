@@ -14,6 +14,8 @@ const LoginSchema = new mongoose.Schema({
     }
 });
 
+LoginSchema.index({ name: 1}, { unique: true });
+
 // Collection Part
 const collection = new mongoose.model("users", LoginSchema);
 

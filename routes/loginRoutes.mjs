@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import Login from "../models/loginSchema.mjs"; 
 const router = express.Router();
 
-// ✅ LOGIN Route
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
